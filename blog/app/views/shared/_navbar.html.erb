@@ -1,0 +1,18 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="<%=root_path %>">Tasty Based Awesomeness</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li ><%= link_to 'Home', root_path %></li>
+      <li><%= link_to 'Menus', menus_path %></li>
+      <li><a href="#">Cart </a></li>
+      <li><a href="#">Help </a></li>
+    </ul>
+    <div class="pull-right">
+        <ul class="nav navbar-nav">
+            <li><button type="button" class="btn btn-default navbar-btn">Sign in</button></li>
+        </ul>     
+	</div>
+  </div>
+</nav>
