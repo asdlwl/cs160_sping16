@@ -1,0 +1,26 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="<%=root_path %>">Tasty Based Awesomeness</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><%= link_to 'Home', root_path %></li>
+      <li><%= link_to 'Menu', menus_path %></li>
+      <li><%= link_to 'Cart', cart_path %></li>
+    </ul>
+    <div class="pull-right">
+        <ul class="nav navbar-nav">
+            <% if account_signed_in? %>
+				<li><%= link_to('Logout', destroy_account_session_path, :method => :delete) %></li>
+			<% else %>
+				<li><%= link_to('Login', new_account_session_path)  %></li>
+			<% end %>
+			<% if account_signed_in? %>
+				<li><%= link_to('Edit registration', edit_account_registration_path) %></li>
+			<% else %>
+				<li><%= link_to('Register', new_account_registration_path)  %></li>
+			<% end %>
+        </ul>     
+	</div>
+  </div>
+</nav>
