@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  food_name: MyString
+  price: 1.5
+  ingredients: MyString
+  restaurant: MyString
+  active: false
+
+two:
+  food_name: MyString
+  price: 1.5
+  ingredients: MyString
+  restaurant: MyString
+  active: false

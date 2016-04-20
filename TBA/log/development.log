@@ -1,0 +1,179 @@
+  [1m[36m (125.0ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.0ms)[0m  select sqlite_version(*)
+  [1m[36m (109.4ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.0ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateMenus (20160419232853)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  CREATE TABLE "menus" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "food_name" varchar, "price" float, "ingredients" varchar, "restaurant" varchar, "active" boolean, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160419232853"]]
+  [1m[35m (93.7ms)[0m  commit transaction
+Migrating to CreateOrderItems (20160419233023)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  CREATE TABLE "order_items" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "menu_id" integer, "order_id" integer, "unit_price" float, "quantity" integer, "total_price" float, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.0ms)[0m  [1mCREATE  INDEX "index_order_items_on_menu_id" ON "order_items" ("menu_id")[0m
+  [1m[35m (0.0ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_order_items_on_menu_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_order_items_on_menu_id' AND type='index'
+
+  [1m[36m (0.0ms)[0m  [1mCREATE  INDEX "index_order_items_on_order_id" ON "order_items" ("order_id")[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160419233023"]]
+  [1m[36m (93.8ms)[0m  [1mcommit transaction[0m
+Migrating to CreateOrders (20160419233306)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mCREATE TABLE "orders" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "subtotal" float, "total" float, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160419233306"]]
+  [1m[36m (171.9ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.0ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.0ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_order_items_on_order_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_order_items_on_order_id' AND type='index'
+[0m
+  [1m[35m (0.0ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_order_items_on_menu_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_order_items_on_menu_id' AND type='index'
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to DeviseCreateAccounts (20160419234710)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (15.7ms)[0m  [1mCREATE TABLE "accounts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.0ms)[0m  select sqlite_version(*)
+  [1m[36m (0.0ms)[0m  [1mCREATE UNIQUE INDEX "index_accounts_on_email" ON "accounts" ("email")[0m
+  [1m[35m (0.0ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_accounts_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_accounts_on_email' AND type='index'
+
+  [1m[36m (0.0ms)[0m  [1mCREATE UNIQUE INDEX "index_accounts_on_reset_password_token" ON "accounts" ("reset_password_token")[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160419234710"]]
+  [1m[36m (187.5ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.0ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.0ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_accounts_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_accounts_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.0ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_accounts_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_accounts_on_email' AND type='index'
+
+  [1m[36m (0.0ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_order_items_on_order_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_order_items_on_order_id' AND type='index'
+[0m
+  [1m[35m (0.0ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_order_items_on_menu_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_order_items_on_menu_id' AND type='index'
+
+
+
+Started GET "/" for ::1 at 2016-04-19 16:48:09 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (0.0ms)
+  Rendered shared/_navbar.html.erb (12.0ms)
+  Rendered layouts/_cart_text.html.erb (116.6ms)
+Completed 200 OK in 3316ms (Views: 3294.7ms | ActiveRecord: 4.0ms)
+
+
+Started GET "/" for ::1 at 2016-04-19 16:48:13 -0700
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (4.0ms)
+  Rendered shared/_navbar.html.erb (0.0ms)
+  Rendered layouts/_cart_text.html.erb (4.0ms)
+Completed 200 OK in 328ms (Views: 328.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2016-04-19 16:48:13 -0700
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (0.0ms)
+  Rendered shared/_navbar.html.erb (4.0ms)
+  Rendered layouts/_cart_text.html.erb (4.0ms)
+Completed 200 OK in 324ms (Views: 323.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/menus" for ::1 at 2016-04-19 16:48:24 -0700
+Processing by MenusController#index as HTML
+  [1m[35mMenu Load (0.0ms)[0m  SELECT "menus".* FROM "menus" WHERE "menus"."active" = ?  [["active", "t"]]
+  Rendered menus/index.html.erb within layouts/application (0.0ms)
+  Rendered shared/_navbar.html.erb (0.0ms)
+  Rendered layouts/_cart_text.html.erb (0.0ms)
+Completed 200 OK in 219ms (Views: 169.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/cart" for ::1 at 2016-04-19 16:48:25 -0700
+Processing by CartsController#show as HTML
+  Rendered carts/_shopping_cart.html.erb (0.0ms)
+  Rendered carts/show.html.erb within layouts/application (31.3ms)
+  Rendered shared/_navbar.html.erb (0.0ms)
+  Rendered layouts/_cart_text.html.erb (0.0ms)
+Completed 200 OK in 219ms (Views: 218.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/menus" for ::1 at 2016-04-19 16:48:27 -0700
+Processing by MenusController#index as HTML
+  [1m[36mMenu Load (0.0ms)[0m  [1mSELECT "menus".* FROM "menus" WHERE "menus"."active" = ?[0m  [["active", "t"]]
+  Rendered menus/index.html.erb within layouts/application (15.6ms)
+  Rendered shared/_navbar.html.erb (0.0ms)
+  Rendered layouts/_cart_text.html.erb (0.0ms)
+Completed 200 OK in 172ms (Views: 170.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2016-04-19 16:48:28 -0700
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (0.0ms)
+  Rendered shared/_navbar.html.erb (0.0ms)
+  Rendered layouts/_cart_text.html.erb (0.0ms)
+Completed 200 OK in 172ms (Views: 183.0ms | ActiveRecord: 0.0ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "menus" WHERE "menus"."active" = ?  [["active", "t"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "menus" ("active", "id", "food_name", "price", "ingredients", "restaurant", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["active", "t"], ["id", 1], ["food_name", "Banana"], ["price", 0.49], ["ingredients", "banana"], ["restaurant", "shit"], ["created_at", "2016-04-19 23:50:20.122178"], ["updated_at", "2016-04-19 23:50:20.122178"]]
+  [1m[36m (125.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "menus" ("active", "id", "food_name", "price", "ingredients", "restaurant", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["active", "t"], ["id", 2], ["food_name", "Apple"], ["price", 0.29], ["ingredients", "apple"], ["restaurant", "shit"], ["created_at", "2016-04-19 23:50:20.247185"], ["updated_at", "2016-04-19 23:50:20.247185"]]
+  [1m[35m (156.3ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (15.6ms)[0m  INSERT INTO "menus" ("active", "id", "food_name", "price", "ingredients", "restaurant", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["active", "t"], ["id", 3], ["food_name", "Carton of Strawberries"], ["price", 0.5], ["ingredients", "strawberry"], ["restaurant", "shit"], ["created_at", "2016-04-19 23:50:20.403485"], ["updated_at", "2016-04-19 23:50:20.403485"]]
+  [1m[36m (93.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mSQL (15.6ms)[0m  DELETE FROM "order_statuses"
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mSQL (125.0ms)[0m  DELETE FROM "menus" WHERE "menus"."active" = ?  [["active", "t"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "menus" ("active", "id", "food_name", "price", "ingredients", "restaurant", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["active", "t"], ["id", 1], ["food_name", "Banana"], ["price", 0.49], ["ingredients", "banana"], ["restaurant", "shit"], ["created_at", "2016-04-19 23:51:03.155537"], ["updated_at", "2016-04-19 23:51:03.155537"]]
+  [1m[36m (93.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "menus" ("active", "id", "food_name", "price", "ingredients", "restaurant", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["active", "t"], ["id", 2], ["food_name", "Apple"], ["price", 0.29], ["ingredients", "apple"], ["restaurant", "shit"], ["created_at", "2016-04-19 23:51:03.264921"], ["updated_at", "2016-04-19 23:51:03.264921"]]
+  [1m[35m (156.2ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "menus" ("active", "id", "food_name", "price", "ingredients", "restaurant", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["active", "t"], ["id", 3], ["food_name", "Carton of Strawberries"], ["price", 0.5], ["ingredients", "strawberry"], ["restaurant", "shit"], ["created_at", "2016-04-19 23:51:03.421165"], ["updated_at", "2016-04-19 23:51:03.421165"]]
+  [1m[36m (93.8ms)[0m  [1mcommit transaction[0m
