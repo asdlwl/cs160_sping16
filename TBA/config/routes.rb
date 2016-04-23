@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :invoices
   get 'orders/index'
 
   get 'order_items/create'
