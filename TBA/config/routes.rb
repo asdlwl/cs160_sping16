@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   get 'menus/index'
   
   get 'welcome/index'
+
+  # get "/menus/:id" => "menus#index"
+  get '/menus&q=:id', to: "menus#index"
   
   resources :menus, only: [:index]
   resource :cart, only: [:show]

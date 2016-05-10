@@ -1,9 +1,36 @@
+
+<div class="form-group">
+<!--     <% id=1 %>
+<div class="input-group col-xs-5 text-center">
+  	<a><%= link_to 'Filter', "/menus?q="+id.to_s, class: "input-group-addon" %></a>
+  <input type="text" class="form-control" placeholder="keywords..." aria-describedby="basic-addon1">
+</div> -->
+
+<% condition=request.original_url.split("?utf8=")[1] %>
+<% #unless (condition==nil)%>
+<% #placeholder=condition.split("&").split("=")[1] %>
+<% #end %>
+
+<%= form_tag("/menus", method: "get") do %>
+  <%= label_tag(:q, "Search for:", placeholder:"asdasd") %>
+  <%= text_field_tag(:q) %>
+  <%= select_tag(:tag, options_for_select([['Food Name', 1], ['Restaurant', 2], ['Ingredients',3]])) %>
+  <%= submit_tag("Search") %>
+<% end %>
+
+</div>
+
 <h3 class="text-center">Products for Sale</h3>
 
 <div class="row">
   <div class="col-xs-6 col-xs-offset-3">
-    <% @menus.each do |menu| %>
+  	<% results=@menus.search(condition)%>
+  	<% unless results == nil%>
+    <% @menus.search(condition).each do |menu| %>
       <%= render "menu_row", menu: menu, order_item: @order_item %>
+    <% end %>
+    <% else %>
+     <h4 class="text-center"> No Matching Results</h4>
     <% end %>
   </div>
 </div>
