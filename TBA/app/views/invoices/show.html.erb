@@ -15,5 +15,16 @@
   <%= @invoice.email %>
 </p>
 
+<p>
+  <strong>Food Items:</strong>
+  <% @invoice.order_items.each do |item| %>
+  <p>
+	<%= item.menu.food_name %>
+	<%= item.quantity.to_i %>
+	<%= item.menu.restaurant %>
+	</p>
+  <% end %>
+ </p>
+
 <%= link_to 'Edit', edit_invoice_path(@invoice) %> |
 <%= link_to 'Back', invoices_path %>
